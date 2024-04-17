@@ -27,8 +27,8 @@ french_bank = [4, 5]
 swiss_bank = [6, 7, 8]
 brazilian_bank = [9, 10]
 
-############
-
+#######################################################################
+#######################################################################
 class Person(ABC):
     def __init__(self, name, age) -> None:
         self._name = name
@@ -46,11 +46,11 @@ class Person(ABC):
     def set_age(self, age):
         self._age = age
         
-    
     @abstractmethod
     def __repr__(self) -> str:
         return f'Person is {self._name} | Age is {self._age}'
     
+#######################################################################
 class Client(Person):
     def __init__(self, name, age) -> None:
         super().__init__(name, age)
@@ -76,6 +76,8 @@ class Client(Person):
     def __repr__(self) -> str:
         return f"{self.type}"
 
+#######################################################################
+#######################################################################
 class Account(ABC):
     def __init__(self):
         pass
@@ -143,6 +145,7 @@ You should save these numbers to use in our authentication process later.\n\n \
     def __repr__(self) -> str:
         return f"{self.type}"
 
+#######################################################################
 class CheckingsAccount(Account):
     def __init__(self):
         super().__init__()
@@ -186,6 +189,7 @@ or you will be more in debt than we can allow.")
     def __repr__(self) -> str:
         return f"{self.type}"
 
+#######################################################################
 class SavingsAccount(Account):
     def __init__(self):
         super().__init__()
@@ -222,6 +226,8 @@ You now have ${self.money_in_bank}.")
     def __repr__(self) -> str:
         return f"{self.type}"
 
+#######################################################################
+#######################################################################
 class Bank():
     def __init__(self) -> None:
         self.money_in_bank = 0
@@ -286,16 +292,34 @@ class Bank():
                 SavingsAccount.withdrawn_money(self)
                 self.authenticated = None
 
+    def save_information(self):
+        print("Information being saved. Wait until completion to continue.")
+        self.savefile = []
+        self.savefile.append(self.client_info._name)
+        self.savefile.append(self.client_info._age)
+        self.savefile.append(self.account_info.bank)
+        self.savefile.append(self.account_info.agency)
+        self.savefile.append(self.account_info.number)
+        self.savefile.append(self.account_info.type)
+        self.savefile.append(self.money_in_bank)
+        with open("simple-bank_savefile.json", "w", encoding="utf8") as file:
+            json.dump(self.savefile, file)
+        print("Information saved. You may continue.")
+
     def __repr__(self) -> str: 
         os.system("cls")
-        return f'Your bank information is as follows: \n \
+        return f'Your personal information is:\n \
+        Your name is {self.client_info._name}.\n \
+        Your age is {self.client_info._age}.\n\n\
+Your bank information is as follows: \n \
         Your bank is {self.account_info.bank} bank.\n \
         Your agency number is {self.account_info.agency}.\n \
         Your account number is {self.account_info.number}.\n \
         Your account is a {self.account_info.type}\n \
         You currently have ${self.money_in_bank} in your account'
 
-###################
+#######################################################################
+#######################################################################
 
 print("Welcome to the SimpleBank App! Here you can create your bank account, deposit and withdrawn money \
 easily. Let us begin!")
@@ -322,7 +346,8 @@ while True:
             print(user)
             print()
         case "s":
-            print("This option is not available in this version.")
+            os.system("cls")
+            user.save_information()
         case "e":
             os.system("cls")
             print("Thank you for using our service!")
