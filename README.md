@@ -7,4 +7,6 @@ Version 2.0 (old) - now working clients, accounts, bank information and deposit 
 
 Version 3.0 (old) - authentication method implemented.
 
-Version 4.0 (current) - user interface implemented, now the program remember the amount of money deposited and withdrawn. Last step is implementing save and load features.
+Version 4.0 (old) - user interface implemented, now the program remember the amount of money deposited and withdrawn. Last step is implementing save and load features.
+
+Version 5.0 (current) - save command implemented.
